@@ -1,3 +1,8 @@
-.drawer {
-  width: 300px;
+.container {
+  padding: 15px;
+}
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
