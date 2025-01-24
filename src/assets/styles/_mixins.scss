@@ -1,0 +1,16 @@
+@mixin flex-row-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin button {
+  border-radius: 8px;
+  font-size: 14px;
+  border-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  font-weight: 400;
+  color: $primary-light;
+  padding: 8px 12px;
+  background: $secondary-dark;
+}

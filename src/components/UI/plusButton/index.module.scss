@@ -1,0 +1,17 @@
+@import '../../../assets/styles/variables';
+@import '../../../assets/styles/mixins';
+
+.circle {
+  @include flex-row-center;
+  width: 30px;
+  height: 30px;
+  background-color: $primary-color;
+  border-radius: 50%;
+  color: $primary-light;
+  cursor: pointer;
+}
+
+.plus {
+  @include flex-row-center;
+  font-size: 30px;
+}

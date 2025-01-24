@@ -1,0 +1,41 @@
+@import '../../assets/styles/variables';
+@import '../../assets/styles/mixins';
+
+.header {
+  background-color: $light-grey;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  color: $primary-dark;
+}
+.container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 24px;
+  margin: 0;
+  color: $primary-color;
+  font-weight: 600;
+}
+
+.subtitle {
+  font-size: 16px;
+  margin: 0;
+  opacity: 0.8;
+  font-weight: 300;
+}
+
+.preview {
+  font-size: 20px;
+  @include flex-row-center;
+  gap: 8px;
+  @include button;
+  .primary-color {
+    font-size: 1.2rem;
+  }
+}
