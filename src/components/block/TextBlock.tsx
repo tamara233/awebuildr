@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
-import './index.module.scss';
+import React from 'react';
+import styles from './index.module.scss';
+import { useDrag } from 'react-dnd';
+import { STATIC_TEXT, STATIC_TEXT_LONG } from '../../constants/constants';
 
 const TextBlock: React.FC = () => {
-  const [text, setText] = useState('Editable Text');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
-  };
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: 'TEXT',
+    item: { type: 'TEXT', content: STATIC_TEXT_LONG },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  }));
 
   return (
-    <div className="block">
-      <input
-        type="text"
-        value={text}
-        onChange={handleChange}
-        className="block-input"
-      />
+    <div
+      className={styles.text}
+      ref={drag}
+      style={{ opacity: isDragging ? 0.5 : 1 }}
+    >
+      <p className={styles.small}>{STATIC_TEXT}</p>
+      <p className={styles.info}>Editable text field</p>
     </div>
   );
 };

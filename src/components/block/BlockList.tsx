@@ -1,20 +1,23 @@
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
+import { IMAGES } from '../../constants/constants';
+import ImageBlock from './ImageBlock';
+import TextBlock from './TextBlock';
 
-const BlockList = () => {
-  const { blocks } = useSelector((state: RootState) => state.blocks);
+import styles from './index.module.scss';
 
+const BlockList: React.FC = () => {
   return (
-    <div>
-      {blocks.map((block) => (
-        <div key={block.id}>
-          {block.type === 'text' ? (
-            <input type="text" value={block.content} readOnly />
-          ) : (
-            <img src={block.content} alt="Block content" />
-          )}
+    <div className={styles.blocks}>
+      <div className={styles.image}>
+        <h5 className={styles.title}>Gallery</h5>
+        <div className={styles.images}>
+          {IMAGES.map((item) => {
+            return <ImageBlock key={item.id} item={item} />;
+          })}
         </div>
-      ))}
+      </div>
+
+      <h5 className={styles.title}>Text</h5>
+      <TextBlock />
     </div>
   );
 };

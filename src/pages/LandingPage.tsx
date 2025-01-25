@@ -4,11 +4,11 @@ import styles from './index.module.scss';
 import PlusButton from '../components/UI/plus-button/PlusButton';
 import DrawerComponent from '../components/drawer/Drawer';
 import { CelebrationRounded } from '@mui/icons-material';
-import { iImage } from '../types/types';
+import { DraggedItem, iTextItem } from '../types/types';
 
 const LandingPage: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [droppedImages, setDroppedImages] = useState<iImage[]>([]);
+  const [droppedElements, setDroppedElements] = useState<DraggedItem[]>([]);
 
   const toggleDrawer = (open: boolean) => {
     setDrawerOpen(open);
@@ -16,9 +16,9 @@ const LandingPage: React.FC = () => {
 
   const [{ isOver, isActive }, drop] = useDrop(
     () => ({
-      accept: 'IMAGE',
-      drop: (item: iImage) => {
-        setDroppedImages((prev) => [...prev, item]);
+      accept: ['IMAGE', 'TEXT'],
+      drop: (item: DraggedItem) => {
+        setDroppedElements((prev) => [...prev, item]);
       },
       collect: (monitor) => ({
         isOver: monitor.isOver(),
@@ -28,20 +28,47 @@ const LandingPage: React.FC = () => {
     []
   );
 
+  const handleTextChange = (
+    index: number,
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const updatedElements = [...droppedElements];
+    const element = updatedElements[index];
+    if (element.type === 'TEXT') {
+      (element as iTextItem).content = event.target.value;
+    }
+    setDroppedElements(updatedElements);
+  };
+
   return (
     <div className={styles.page}>
       {}
       <div ref={drop} className={styles.container}>
         <div className={styles.items}>
-          {droppedImages.map((image, index) => (
-            <img
-              className={styles.image}
-              key={index}
-              src={image.src}
-              alt={`Dropped Image ${index + 1}`}
-            />
-          ))}
-          {isActive || !droppedImages.length ? (
+          {droppedElements.map((item, index) => {
+            if (item.type === 'IMAGE')
+              return (
+                <img
+                  className={styles.image}
+                  key={index}
+                  src={item.src}
+                  alt={`Dropped Image ${index + 1}`}
+                />
+              );
+            else
+              return (
+                <div className={styles.text} key={index}>
+                  <textarea
+                    className={styles.textarea}
+                    value={item.content}
+                    onChange={(e) => handleTextChange(index, e)}
+                    autoFocus
+                  />
+                </div>
+              );
+          })}
+
+          {isActive || !droppedElements.length ? (
             <div
               ref={drop}
               className={styles.active}
@@ -49,8 +76,8 @@ const LandingPage: React.FC = () => {
                 backgroundColor: isOver ? '#f3eef8' : 'transparent',
               }}
             >
-              {droppedImages.length >= 1 && <h3>Add your block here</h3>}
-              {droppedImages.length < 1 && (
+              {droppedElements.length >= 1 && <h3>Add your block here</h3>}
+              {droppedElements.length < 1 && (
                 <div className={styles.initial}>
                   <div className={styles.plus}>
                     <PlusButton onClick={() => toggleDrawer(true)} />

@@ -1,4 +1,12 @@
 export interface iImage {
-  id: number;
+  id: string;
   src: string;
+  type: 'IMAGE';
 }
+
+export interface iTextItem {
+  type: 'TEXT';
+  content: string;
+}
+
+export type DraggedItem = iImage | iTextItem;
