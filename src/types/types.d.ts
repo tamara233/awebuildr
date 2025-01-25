@@ -7,6 +7,7 @@ export interface iImage {
 export interface iTextItem {
   type: 'TEXT';
   content: string;
+  id: string;
 }
 
 export type DraggedItem = iImage | iTextItem;

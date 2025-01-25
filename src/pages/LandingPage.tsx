@@ -5,6 +5,8 @@ import PlusButton from '../components/UI/plus-button/PlusButton';
 import DrawerComponent from '../components/drawer/Drawer';
 import { CelebrationRounded } from '@mui/icons-material';
 import { DraggedItem, iTextItem } from '../types/types';
+import Toolbar from '../components/toolbar/Toolbar';
+import { nanoid } from '@reduxjs/toolkit';
 
 const LandingPage: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -18,7 +20,8 @@ const LandingPage: React.FC = () => {
     () => ({
       accept: ['IMAGE', 'TEXT'],
       drop: (item: DraggedItem) => {
-        setDroppedElements((prev) => [...prev, item]);
+        const newItem = { ...item, id: nanoid() };
+        setDroppedElements((prev) => [...prev, newItem]);
       },
       collect: (monitor) => ({
         isOver: monitor.isOver(),
@@ -40,33 +43,77 @@ const LandingPage: React.FC = () => {
     setDroppedElements(updatedElements);
   };
 
+  const handleDuplicate = (index: number) => {
+    const element = droppedElements[index];
+    const newElement = { ...element, id: nanoid() };
+
+    const updatedElements = [...droppedElements];
+    updatedElements.splice(index + 1, 0, newElement);
+
+    setDroppedElements(updatedElements);
+  };
+
+  const handleDelete = (index: number) => {
+    const updatedElements = droppedElements.filter((_, i) => i !== index);
+    setDroppedElements(updatedElements);
+  };
+
+  const handleMoveUp = (index: number) => {
+    if (index > 0) {
+      const updatedElements = [...droppedElements];
+      const temp = updatedElements[index];
+      updatedElements[index] = updatedElements[index - 1];
+      updatedElements[index - 1] = temp;
+      setDroppedElements(updatedElements);
+    }
+  };
+
+  const handleMoveDown = (index: number) => {
+    if (index < droppedElements.length - 1) {
+      const updatedElements = [...droppedElements];
+      const temp = updatedElements[index];
+      updatedElements[index] = updatedElements[index + 1];
+      updatedElements[index + 1] = temp;
+      setDroppedElements(updatedElements);
+    }
+  };
+
+  const handleSave = () => {
+    if (!droppedElements.length) return;
+    const data = JSON.stringify(droppedElements, null, 2);
+    console.log('Exportable data:', data);
+  };
+
   return (
     <div className={styles.page}>
-      {}
       <div ref={drop} className={styles.container}>
         <div className={styles.items}>
-          {droppedElements.map((item, index) => {
-            if (item.type === 'IMAGE')
-              return (
+          {droppedElements.map((item, index) => (
+            <div key={index} className={styles.wrapper}>
+              <Toolbar
+                index={index}
+                onDuplicate={handleDuplicate}
+                onDelete={handleDelete}
+                onMoveUp={handleMoveUp}
+                onMoveDown={handleMoveDown}
+                count={droppedElements.length}
+              />
+              {item.type === 'IMAGE' ? (
                 <img
                   className={styles.image}
-                  key={index}
                   src={item.src}
-                  alt={`Dropped Image ${index + 1}`}
+                  alt={`Dropped Image ${item.id}`}
                 />
-              );
-            else
-              return (
-                <div className={styles.text} key={index}>
-                  <textarea
-                    className={styles.textarea}
-                    value={item.content}
-                    onChange={(e) => handleTextChange(index, e)}
-                    autoFocus
-                  />
-                </div>
-              );
-          })}
+              ) : (
+                <textarea
+                  className={styles.textarea}
+                  value={item.content}
+                  onChange={(e) => handleTextChange(index, e)}
+                  autoFocus
+                />
+              )}
+            </div>
+          ))}
 
           {isActive || !droppedElements.length ? (
             <div
@@ -97,9 +144,17 @@ const LandingPage: React.FC = () => {
           )}
         </div>
       </div>
-      <button className={styles.button} onClick={() => toggleDrawer(true)}>
-        Add
-      </button>
+      <div className={styles.buttons}>
+        <button className={styles.button} onClick={() => toggleDrawer(true)}>
+          Add
+        </button>
+        <button
+          className={`${styles.button} ${droppedElements.length < 1 ? 'button-inactive' : ''}`}
+          onClick={handleSave}
+        >
+          Save
+        </button>
+      </div>
       <DrawerComponent open={drawerOpen} onClose={() => toggleDrawer(false)} />
     </div>
   );

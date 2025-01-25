@@ -34,6 +34,7 @@
   height: 120px;
   width: 180px;
   object-fit: cover;
+  position: relative;
 }
 
 .text {
@@ -43,6 +44,7 @@
   border: 1px solid $border-color;
   border-radius: 8px;
   padding: 10px;
+  position: relative;
   .small {
     font-size: 9px;
     color: #a6a6a6;
