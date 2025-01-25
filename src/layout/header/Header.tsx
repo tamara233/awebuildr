@@ -10,9 +10,9 @@ const Header: React.FC = () => {
           <h1 className={styles.title}>AweBuildr</h1>
           <h2 className={styles.subtitle}>Making the world easy</h2>
         </div>
-        <div className={styles.preview}>
+        <button className={styles.preview}>
           Preview <PlayArrow className="primary-color" />
-        </div>
+        </button>
       </div>
     </header>
   );

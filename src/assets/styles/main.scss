@@ -1,5 +1,6 @@
-@import './mixins';
-@import './variables';
+@use './mixins' as *;
+@use './variables' as *;
+
 /* Global Reset */
 * {
   margin: 0;
@@ -20,4 +21,11 @@ body {
 
 .flex-row-center {
   @include flex-row-center;
+}
+.MuiDrawer-root {
+  position: relative !important;
+}
+.MuiDrawer-paper {
+  background-color: $light-grey !important;
+  width: 400px !important;
 }
