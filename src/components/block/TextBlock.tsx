@@ -6,7 +6,7 @@ import { STATIC_TEXT, STATIC_TEXT_LONG } from '../../constants/constants';
 const TextBlock: React.FC = () => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'TEXT',
-    item: { type: 'TEXT', content: STATIC_TEXT_LONG },
+    item: { type: 'TEXT', content: STATIC_TEXT_LONG, id: Date.now() },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),

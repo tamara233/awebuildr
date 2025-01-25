@@ -61,6 +61,11 @@
   }
 }
 
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 .button {
   font-size: 20px;
   @include flex-row-center;
@@ -70,6 +75,10 @@
   background-color: transparent;
   border: 1px solid $primary-dark;
   color: $primary-dark;
+}
+
+.wrapper {
+  position: relative;
 }
 
 .textarea {

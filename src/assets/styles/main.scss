@@ -29,3 +29,16 @@ body {
   background-color: $light-grey !important;
   width: 400px !important;
 }
+
+.MuiIconButton-root {
+  font-size: 16px !important;
+
+  &:hover {
+    background-color: transparent !important;
+    color: $primary-dark !important;
+  }
+}
+
+.button-inactive {
+  opacity: 0.5;
+}
