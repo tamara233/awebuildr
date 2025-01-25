@@ -86,10 +86,10 @@ const LandingPage: React.FC = () => {
 
   return (
     <div className={styles.page}>
-      <div ref={drop} className={styles.container}>
+      <div ref={drop} className={styles.container} data-testid="drop-target">
         <div className={styles.items}>
           {droppedElements.map((item, index) => (
-            <div key={index} className={styles.wrapper}>
+            <div key={item.id} className={styles.wrapper}>
               <div className="toolbar">
                 <Toolbar
                   index={index}
@@ -112,7 +112,7 @@ const LandingPage: React.FC = () => {
                   className={styles.textarea}
                   value={item.content}
                   onChange={(e) => handleTextChange(index, e)}
-                  autoFocus
+                  role="textbox"
                 />
               )}
             </div>
