@@ -1,11 +1,11 @@
 import { useDrag } from 'react-dnd';
 
-interface ImageBlockProps {
+type ImageBlockProps = {
   item: {
     id: string;
     src: string;
   };
-}
+};
 
 const ImageBlock: React.FC<ImageBlockProps> = ({ item }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
