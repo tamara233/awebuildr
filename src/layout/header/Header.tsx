@@ -10,12 +10,18 @@ const Header: React.FC = () => {
           <h1 className={styles.title}>AweBuildr</h1>
           <h2 className={styles.subtitle}>Making the world easy</h2>
         </div>
-        <button className={styles.preview}>
-          Preview <PlayArrow className="primary-color" />
-        </button>
+        <a
+          href="https://awebuildr.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.preview}
+        >
+          LIVE <PlayArrow className="primary-color" />
+        </a>
       </div>
     </header>
   );
 };
 
 export default Header;
+// https://awebuildr.vercel.app/
