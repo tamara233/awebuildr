@@ -29,3 +29,19 @@ body {
   background-color: $light-grey !important;
   width: 400px !important;
 }
+
+.MuiIconButton-root {
+  &:hover {
+    background-color: transparent !important;
+    color: $primary-dark !important;
+  }
+}
+
+.button-inactive {
+  opacity: 0.5;
+}
+.toolbar {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s;
+}

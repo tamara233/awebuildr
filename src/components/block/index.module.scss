@@ -1,3 +1,5 @@
+@use '../../assets//styles/variables' as *;
+
 .block {
   background-color: #ffffff;
   border: 1px solid #ccc;
@@ -13,4 +15,44 @@
   border: none;
   outline: none;
   background-color: #f9f9f9;
+}
+
+.title {
+  font-size: 16px;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  font-weight: 300;
+}
+
+.images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.single {
+  height: 120px;
+  width: 180px;
+  object-fit: cover;
+  position: relative;
+}
+
+.text {
+  width: 250px;
+  height: 150px;
+  background: $light-grey;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  padding: 10px;
+  position: relative;
+  .small {
+    font-size: 9px;
+    color: #a6a6a6;
+    line-height: 15px;
+    margin-top: 30px;
+  }
+  .info {
+    margin-top: 40px;
+    font-size: 14px;
+  }
 }
