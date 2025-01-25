@@ -21,6 +21,7 @@ describe('Toolbar visibility on hover', () => {
 
     const toolbar = container.querySelector('.toolbar');
     expect(toolbar).toHaveStyle('display: none');
+    // @ts-expect-error : Type mismatch due to third-party library typing
     toolbar!.style.display = 'block';
 
     expect(toolbar).toHaveStyle('display: block');
