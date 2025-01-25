@@ -2,8 +2,7 @@ import React from 'react';
 import Drawer from '@mui/material/Drawer';
 import styles from './index.module.scss';
 import X from '@mui/icons-material/X';
-import ImageBlock from '../block/ImageBlock';
-import { images } from '../../constants/constants';
+import BlockList from '../block/BlockList';
 
 type DrawerComponentProps = {
   open: boolean;
@@ -28,10 +27,7 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({ open, onClose }) => {
           <h5>Add Blocks</h5>
           <X sx={{ cursor: 'pointer' }} onClick={onClose} />
         </div>
-
-        {images.map((item) => {
-          return <ImageBlock key={item.id} item={item} />;
-        })}
+        <BlockList />
       </div>
     </Drawer>
   );
