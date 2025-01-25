@@ -66,6 +66,7 @@
   flex-direction: column;
   gap: 15px;
 }
+
 .button {
   font-size: 20px;
   @include flex-row-center;
@@ -79,6 +80,11 @@
 
 .wrapper {
   position: relative;
+
+  &:hover > div {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 .textarea {

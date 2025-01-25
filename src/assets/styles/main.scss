@@ -31,8 +31,6 @@ body {
 }
 
 .MuiIconButton-root {
-  font-size: 16px !important;
-
   &:hover {
     background-color: transparent !important;
     color: $primary-dark !important;
@@ -41,4 +39,9 @@ body {
 
 .button-inactive {
   opacity: 0.5;
+}
+.toolbar {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s;
 }

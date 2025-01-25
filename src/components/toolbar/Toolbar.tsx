@@ -26,7 +26,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
   return (
     <div className={styles.toolbar}>
       <IconButton onClick={() => onDuplicate(index)}>
-        <ContentCopy />
+        <ContentCopy sx={{ fontSize: '18px' }} />
       </IconButton>
       <IconButton onClick={() => onDelete(index)}>
         <DeleteOutline />

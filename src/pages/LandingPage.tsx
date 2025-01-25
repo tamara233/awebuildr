@@ -90,14 +90,17 @@ const LandingPage: React.FC = () => {
         <div className={styles.items}>
           {droppedElements.map((item, index) => (
             <div key={index} className={styles.wrapper}>
-              <Toolbar
-                index={index}
-                onDuplicate={handleDuplicate}
-                onDelete={handleDelete}
-                onMoveUp={handleMoveUp}
-                onMoveDown={handleMoveDown}
-                count={droppedElements.length}
-              />
+              <div className="toolbar">
+                <Toolbar
+                  index={index}
+                  onDuplicate={handleDuplicate}
+                  onDelete={handleDelete}
+                  onMoveUp={handleMoveUp}
+                  onMoveDown={handleMoveDown}
+                  count={droppedElements.length}
+                />
+              </div>
+
               {item.type === 'IMAGE' ? (
                 <img
                   className={styles.image}
